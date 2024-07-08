@@ -23,7 +23,7 @@ export function ProviderApollo({ children }: IProviderApollo) {
   useEffect(() => {
     dispatch(saveTokenAsyncThunk());
 
-    if (IsToken) {
+    if (typeof window !== 'undefined' && IsToken) {
       setTimeout(() => {
         dispatch(resetToken());
       }, tokenLiveTimeMinutes * 60 * 1000 - (timeNow - tokenCreatedAt));
