@@ -1,6 +1,6 @@
 
 export function createTimer() {
-  let timer: NodeJS.Timeout;
+  let timer: ReturnType<typeof setTimeout>;
 
   function start(toDo: () => void, ms: number = 600) {
     timer = setTimeout(() => {

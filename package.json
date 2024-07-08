@@ -6,10 +6,11 @@
   "scripts": {
     "comp": "generate-react component",
     "dev": "vite",
-    "build": "tsc -b && vite build",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
-    "generate": "graphql-codegen --config codegen.yml"
+    "generate": "graphql-codegen --config codegen.yml",
+    "build": "tsc -b && vite build",
+    "start:prod": "npm run build && pm2 start ecosystem.config.js"
   },
   "dependencies": {
     "@apollo/client": "^3.10.8",
@@ -41,6 +42,6 @@
     "eslint-plugin-react-refresh": "^0.4.7",
     "sass": "^1.77.6",
     "typescript": "^5.5.3",
-    "vite": "^5.3.1"
+    "vite": "^5.3.3"
   }
 }
