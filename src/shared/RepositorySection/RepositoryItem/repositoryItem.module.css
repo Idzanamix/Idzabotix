@@ -51,8 +51,9 @@
   .item:hover {
     border-color: var(--commentBorderHover);
 
-    .article {
-      transform: translateX(1%);
-    }
+  }
+
+  .item:hover .article {
+    transform: translateX(1%);
   }
 }

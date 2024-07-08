@@ -23,16 +23,14 @@
   color: var(--trueLight);
 }
 
-.link:hover {
-  .logo {
-    scale: 1.06;
-  }
+.link:hover .logo {
+  scale: 1.06;
+}
 
-  .nameToolki {
-    color: var(--trueLight);
-  }
+.link:hover .nameToolki {
+  color: var(--trueLight);
+}
 
-  .nameNamix {
-    color: var(--colorPurple);
-  }
+.link:hover .nameNamix {
+  color: var(--colorPurple);
 }

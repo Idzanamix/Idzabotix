@@ -1,6 +1,6 @@
 import { NavLink } from 'react-router-dom';
 import { getRelativeTimeString } from '../../../utils/getRelativeTimeString';
-import styles from './RepositoryItem.module.scss'
+import styles from './repositoryItem.module.css'
 import { StargazerCount } from '../StargazerCount';
 
 export interface IRepositoryItem {
