@@ -1,0 +1,17 @@
+.button {
+  border: 1px solid transparent;
+  border-radius: 5px;
+  padding: 5px;
+  aspect-ratio: 1 / 1;
+  width: 50%;
+  max-width: 40px;
+  font-size: 22px;
+  box-shadow: 0px 0px 3px 0px rgba(255, 255, 255, 0.15);
+}
+
+.isActive {
+  cursor: not-allowed;
+  color: var(--colorPurple);
+  border-color: var(--colorPurple);
+  scale: 1.1;
+}

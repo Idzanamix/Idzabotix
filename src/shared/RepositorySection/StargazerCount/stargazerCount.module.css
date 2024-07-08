@@ -1,0 +1,9 @@
+.star {
+  border: 1px solid var(--gray66);
+  align-self: flex-start;
+  padding: 3px 6px;
+  border-radius: 5px;
+  align-self: flex-start;
+  z-index: 100;
+  font-size: 14px;
+}

@@ -1,0 +1,26 @@
+query repositorysDataByStars ($query: String!, $after: String, $before: String) {
+  search(
+    query: $query
+    type: REPOSITORY
+    first: 10
+    after: $after
+    before: $before
+  ) {
+    nodes {
+      ... on Repository {
+        name
+        stargazerCount
+        updatedAt
+        url
+        id
+      }
+    }
+    pageInfo {
+      startCursor
+      endCursor
+      hasPreviousPage
+      hasNextPage
+    }
+    repositoryCount
+  }
+}

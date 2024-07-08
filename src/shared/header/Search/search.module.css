@@ -1,0 +1,60 @@
+.search {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.input {
+  padding: 12px 37px;
+  width: 400px;
+  border-radius: 25px;
+  border: none;
+  outline: none;
+  background-color: var(--background);
+  transition: background-color .15s ease-in-out;
+  border: 1px solid var(--darkLine);
+  font-size: 14px;
+  color: var(--trueLight);
+}
+
+.input::-webkit-search-cancel-button {
+  display: none;
+}
+
+.input::placeholder {
+  color: var(--gray99);
+  font-size: 14px;
+}
+
+.input:focus {
+  background-color: var(--darkLine);
+  border: 1px solid var(--darkLine);
+}
+
+.input:hover {
+  background-color: var(--darkLine);
+}
+
+.search svg {
+  width: 30px;
+  height: 30px;
+  position: absolute;
+  top: 7px;
+  left: 7px;
+}
+
+.clearButton {
+  position: absolute;
+  padding: 0;
+  background: none;
+  margin: 0;
+  border: none;
+  outline: none;
+  right: 7px;
+  top: 6px;
+}
+
+
+.clearButton svg {
+  position: static;
+}

@@ -1,0 +1,15 @@
+  .layout {
+    display: flex;
+    flex-direction: column;
+    max-width: 100%;
+    padding-left: 175px;
+    padding-right: 175px;
+    height: 100%;
+  }
+
+  @media(max-width:1024px) {
+    .layout {
+      padding-left: 15px;
+      padding-right: 15px;
+    }
+  }
