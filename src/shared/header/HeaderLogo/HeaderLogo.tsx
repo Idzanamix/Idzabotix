@@ -1,5 +1,5 @@
 import styles from './headerLogo.module.css'
-import image from '../../../../public/vite.svg'
+import image from '../../../../src/icons/img/vite.svg'
 import { NavLink } from 'react-router-dom'
 
 export function HeaderLogo() {

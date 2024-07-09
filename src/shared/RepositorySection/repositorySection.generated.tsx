@@ -1,8 +1,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable react-refresh/only-export-components */
+import { gql } from '@apollo/client/index.js';
 import * as Types from '../../types.generated';
 
-import { gql } from '@apollo/client';
 import * as Apollo from '@apollo/client';
 const defaultOptions = {} as const;
 export type RepositorysDataByStarsQueryVariables = Types.Exact<{

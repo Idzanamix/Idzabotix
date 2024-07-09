@@ -1,12 +1,12 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { ReactNode, useEffect } from "react";
-import { ApolloProvider, } from '@apollo/client';
 import { setClient } from "./client";
-import { selectCreatedAt, selectIsToken, selectLiveTimeMinutes, useAppSelector } from "../../../store/storeSelectors";
+import { selectAppoloData, useAppSelector } from "../../../store/storeSelectors";
 import { useDispatch } from "react-redux";
 import { saveTokenAsyncThunk } from "../../../store/thunks/token/saveTokenAsyncThunk";
 import { resetToken } from "../../../store/slices/tokenSlice";
 import { useUnmount } from "../../../hooks/useUnmount";
+import { ApolloProvider } from "@apollo/client/index.js";
 
 interface IProviderApollo {
   children: ReactNode;
@@ -15,20 +15,18 @@ interface IProviderApollo {
 export function ProviderApollo({ children }: IProviderApollo) {
   const client = setClient();
   const dispatch = useDispatch();
-  const IsToken = useAppSelector(selectIsToken);
-  const tokenCreatedAt = useAppSelector(selectCreatedAt);
-  const tokenLiveTimeMinutes = useAppSelector(selectLiveTimeMinutes);
+  const { token, CreatedAt, liveTimeMinutes } = useAppSelector(selectAppoloData);
   const timeNow = new Date().getTime();
 
   useEffect(() => {
     dispatch(saveTokenAsyncThunk());
 
-    if (typeof window !== 'undefined' && IsToken) {
+    if (typeof window !== 'undefined' && token) {
       setTimeout(() => {
         dispatch(resetToken());
-      }, tokenLiveTimeMinutes * 60 * 1000 - (timeNow - tokenCreatedAt));
+      }, liveTimeMinutes * 60 * 1000 - (timeNow - CreatedAt));
     }
-  }, [IsToken]);
+  }, [token]);
 
   const unmount = useUnmount();
 

@@ -23,5 +23,5 @@
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true
   },
-  "include": ["src/app", "src/types/css.d.ts", "src/**/*"]
+  "include": ["src/app", "src/types/css.d.ts", "src/**/*", "server.js"]
 }

@@ -1,3 +1,4 @@
+import { createSelector } from "@reduxjs/toolkit";
 import { rootStateType } from "./storeRedux";
 import { TypedUseSelectorHook, useSelector } from "react-redux";
 
@@ -9,3 +10,13 @@ export const selectLiveTimeMinutes = ({ githubToken }: rootStateType) => githubT
 export const selectQurery = ({ pagesPagination }: rootStateType) => pagesPagination.currentQuery;
 export const selectPagesData = ({ pagesPagination }: rootStateType) => pagesPagination;
 export const selectSearchValue = ({ search }: rootStateType) => search.searchValue;
+
+export const selectAppoloData = createSelector(selectIsToken, selectCreatedAt, selectLiveTimeMinutes,
+  (token, CreatedAt, liveTimeMinutes) => {
+    return {
+      token,
+      CreatedAt,
+      liveTimeMinutes
+    }
+  })
+
