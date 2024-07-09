@@ -5,8 +5,10 @@ import react from '@vitejs/plugin-react'
 export default defineConfig({
   server: {
     cors: false,
+    host: 'https://toolkinamix.ru',
+    port: 80,
     proxy: {
-      '/login': 'https://github.com/'
+      '/login': 'https://github.com/',
     },
   },
   plugins: [react()],
