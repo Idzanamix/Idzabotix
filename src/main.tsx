@@ -1,6 +1,5 @@
 import './index.css'
 import React from 'react'
-import ReactDOM from 'react-dom/client'
 import { ProviderApollo } from './app/providers/Apollo/ApolloProvider.tsx'
 import { RepositorySection } from './shared/RepositorySection/RepositorySection.tsx'
 import { MountedBrowserRouter } from './app/providers/Router/Router.tsx'
@@ -13,27 +12,33 @@ import { Main } from './shared/Main/Main.tsx'
 import { RepositoryPage } from './shared/RepositorySection/RepositoryPage/RepositoryPage.tsx'
 
 
-ReactDOM.createRoot(document.getElementById('root')!).render(
-  <React.StrictMode>
-    <ReduxProvider>
-      <ProviderApollo>
-        <MountedBrowserRouter>
-          <Layout>
-            <Header />
-            <Main>
-              <Routes>
-                <Route path='/repository' element={<RepositorySection />} />
-                <Route path='/repository/search' element={<RepositorySection />} />
-                <Route path='/repository/search/:request' element={<RepositorySection />} />
-                <Route path='/repository/:id' element={<RepositoryPage />} />
-                <Route path='/' element={<Navigate to={'/repository'} />} />
-                <Route path='/oauth' element={<Navigate to={'/'} />} />
-                <Route path='*' element={<Error massage='ERROR 404: page not found' />} />
-              </Routes>
-            </Main>
-          </Layout>
-        </MountedBrowserRouter>
-      </ProviderApollo>
-    </ReduxProvider>
-  </React.StrictMode>,
-)
+// ReactDOM.createRoot(document.getElementById('root')!).render(
+
+const App = () => {
+  return (
+    <React.StrictMode>
+      <ReduxProvider>
+        <ProviderApollo>
+          <MountedBrowserRouter>
+            <Layout>
+              <Header />
+              <Main>
+                <Routes>
+                  <Route path='/repository' element={<RepositorySection />} />
+                  <Route path='/repository/search' element={<RepositorySection />} />
+                  <Route path='/repository/search/:request' element={<RepositorySection />} />
+                  <Route path='/repository/:id' element={<RepositoryPage />} />
+                  <Route path='/' element={<Navigate to={'/repository'} />} />
+                  <Route path='/oauth' element={<Navigate to={'/'} />} />
+                  <Route path='*' element={<Error massage='ERROR 404: page not found' />} />
+                </Routes>
+              </Main>
+            </Layout>
+          </MountedBrowserRouter>
+        </ProviderApollo>
+      </ReduxProvider>
+    </React.StrictMode>
+  )
+}
+
+export default App;
