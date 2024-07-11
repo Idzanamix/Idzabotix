@@ -6,7 +6,11 @@ export default defineConfig({
   server: {
     cors: false,
     proxy: {
-      '/login': 'https://github.com/'
+      '/oauth': {
+        target: 'http://localhost:5173',
+        changeOrigin: true,
+      },
+      middlewareMode: 'ssr',
     },
   },
   plugins: [react()],

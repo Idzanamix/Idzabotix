@@ -66,36 +66,34 @@ app.get('/auth', (req, res) => {
 });
 
 
-app.post('/api/graphql', async (req, res) => {
-  const accessToken = req.cookies?.access_token; // Получаем токен из куки
+// app.post('/api/graphql', async (req, res) => {
+//   const accessToken = req.cookies?.access_token; // Получаем токен из куки
 
-  console.log('accessToken', req.cookies?.access_token);
+//   console.log('accessToken', req.cookies?.access_token);
 
-  if (accessToken) {
-    try {
-      const response = await axios.post('https://api.github.com/graphql', req.body, {
-        headers: {
-          'Authorization': `Bearer ${accessToken}`,
-        },
-      });
+//   if (accessToken) {
+//     try {
+//       const response = await axios.post('https://api.github.com/graphql', req.body, {
+//         headers: {
+//           'Authorization': `Bearer ${accessToken}`,
+//         },
+//       });
 
-      res.send(response.data);
-    } catch (error) {
-      console.log(error);
-    }
-  } else {
-    console.log('no Token');
-  }
-});
+//       res.send(response.data);
+//     } catch (error) {
+//       console.log(error);
+//     }
+//   } else {
+//     console.log('no Token');
+//   }
+// });
 
 
-app.get('/oauth', async ({ query: { code } }, res) => {
-  console.log('111');
+app.get('/oauth', async ({ query: { code }, headers, cookies }, res) => {
 
   const params = `client_id=${process.env.CLIENT_ID}&client_secret=${process.env.CLIENT_SECRET}&code=${code}&redirect_uri=${process.env.SITE_URL}`
 
   try {
-    console.log('222');
 
     const { data } = await axios.post('https://github.com/login/oauth/access_token?' + params,
       {
@@ -109,16 +107,21 @@ app.get('/oauth', async ({ query: { code } }, res) => {
 
     console.log('token', data);
 
+    console.log('headers.origin', headers?.origin);
+    console.log('req.cookies', cookies);
+
     if (data?.access_token) {
-      console.log('333');
 
       res
         .cookie('access_token', data.access_token, {
           httpOnly: true,
-          secure: isProduction,
-          maxAge: 60 * 60 * 1000
+          secure: true,
+          maxAge: 60 * 60 * 1000,
+          path: '/'
         })
         .redirect('/repository');
+
+      console.log('req.cookies', cookies);
     }
 
   } catch (error) {
@@ -131,7 +134,6 @@ app.get('/oauth', async ({ query: { code } }, res) => {
 
 // Serve HTML
 app.use('*', async (req, res) => {
-  console.log('4444');
   try {
     const url = req.originalUrl.replace(base, '')
 
