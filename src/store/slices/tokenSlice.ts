@@ -23,9 +23,9 @@ const tokenSlice = createSlice({
   initialState,
   reducers: {
     resetToken() {
-      setTokenCookie(null, 0);
+      // setTokenCookie(null, 0);
 
-      return initialState
+      // return initialState
     },
     setToken(state, action: PayloadAction<ITokenAction>) {
       return {

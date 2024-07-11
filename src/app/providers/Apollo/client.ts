@@ -1,19 +1,17 @@
 import { setContext } from '@apollo/client/link/context';
-import { getTokenCookie } from '../../../store/cookie/token/getTokenCookie';
 import { createHttpLink, ApolloClient, InMemoryCache } from '@apollo/client/index.js';
 
 export function setClient() {
   const httpLink = createHttpLink({
-    uri: 'https://api.github.com/graphql',
+    uri: '/api/graphql', // Теперь ваш endpoint на backend
   });
 
   const authLink = setContext((_, { headers }) => {
-    const token = getTokenCookie();
 
     return {
       headers: {
         ...headers,
-        authorization: `Bearer ${token}`,
+        authorization: `Bearer `,
       },
     };
   });

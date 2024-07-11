@@ -20,8 +20,8 @@ const App = () => {
             <Main>
               <Routes>
                 <Route path='/repository' element={<RepositorySection />} />
-                <Route path='/repository/search' element={<RepositorySection />} />
-                <Route path='/repository/search/:request' element={<RepositorySection />} />
+                {/* <Route path='/repository/search' element={<RepositorySection />} /> */}
+                {/* <Route path='/repository/search/:request' element={<RepositorySection />} /> */}
                 <Route path='/repository/:id' element={<RepositoryPage />} />
                 <Route path='/' element={<Navigate to={'/repository'} />} />
                 <Route path='/oauth' element={<Navigate to={'/'} />} />

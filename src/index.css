@@ -82,6 +82,7 @@ a {
   color: var(--colorPurple);
   text-decoration: inherit;
   font-size: 22px;
+  cursor: pointer;
 }
 
 a:hover {

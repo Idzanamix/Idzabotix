@@ -3,9 +3,8 @@ import { ReactNode, useEffect } from "react";
 import { setClient } from "./client";
 import { selectAppoloData, useAppSelector } from "../../../store/storeSelectors";
 import { useDispatch } from "react-redux";
-import { saveTokenAsyncThunk } from "../../../store/thunks/token/saveTokenAsyncThunk";
+// import { saveTokenAsyncThunk } from "../../../store/thunks/token/saveTokenAsyncThunk";
 import { resetToken } from "../../../store/slices/tokenSlice";
-import { useUnmount } from "../../../hooks/useUnmount";
 import { ApolloProvider } from "@apollo/client/index.js";
 
 interface IProviderApollo {
@@ -19,19 +18,17 @@ export function ProviderApollo({ children }: IProviderApollo) {
   const timeNow = new Date().getTime();
 
   useEffect(() => {
-    dispatch(saveTokenAsyncThunk());
+    // dispatch(saveTokenAsyncThunk());
 
-    if (typeof window !== 'undefined' && token) {
+    if (token) {
       setTimeout(() => {
         dispatch(resetToken());
       }, liveTimeMinutes * 60 * 1000 - (timeNow - CreatedAt));
     }
   }, [token]);
 
-  const unmount = useUnmount();
-
   return (
-    unmount && <ApolloProvider client={client}>
+    <ApolloProvider client={client}>
       {children}
     </ApolloProvider>
   )
