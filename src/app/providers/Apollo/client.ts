@@ -1,17 +1,17 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { setContext } from '@apollo/client/link/context';
 import { createHttpLink, ApolloClient, InMemoryCache } from '@apollo/client/index.js';
 
-export function setClient() {
+export function useClient(token: string) {
   const httpLink = createHttpLink({
-    uri: '/api/graphql', // Теперь ваш endpoint на backend
+    uri: 'https://api.github.com/graphql',
   });
 
   const authLink = setContext((_, { headers }) => {
-
     return {
       headers: {
         ...headers,
-        authorization: `Bearer `,
+        authorization: `Bearer ${token}`,
       },
     };
   });
@@ -23,5 +23,4 @@ export function setClient() {
 
   return client
 }
-
 

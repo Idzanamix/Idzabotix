@@ -1,21 +1,17 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
-import { setTokenCookie } from "../cookie/token/setTokenCookie";
 
 export interface ITokenState {
   isToken: boolean;
+  isAuthorized: boolean;
   createdAt: number;
-  liveTimeMinutes: number;
-}
-
-interface ITokenAction {
-  isToken: boolean;
   liveTimeMinutes: number;
 }
 
 const initialState: ITokenState = {
   isToken: false,
+  isAuthorized: true,
   createdAt: NaN,
-  liveTimeMinutes: NaN
+  liveTimeMinutes: 60
 }
 
 const tokenSlice = createSlice({
@@ -23,21 +19,24 @@ const tokenSlice = createSlice({
   initialState,
   reducers: {
     resetToken() {
-      // setTokenCookie(null, 0);
-
-      // return initialState
+      return initialState
     },
-    setToken(state, action: PayloadAction<ITokenAction>) {
+    setTokenSlise(state, action: PayloadAction<boolean>) {
       return {
         ...state,
-        isToken: action.payload.isToken,
-        createdAt: action.payload ? new Date().getTime() : NaN,
-        liveTimeMinutes: action.payload.liveTimeMinutes
+        isToken: action.payload,
+        createdAt: action.payload ? new Date().getTime() : NaN
+      }
+    },
+    setIsAuthorizedState(state, action: PayloadAction<boolean>) {
+      return {
+        ...state,
+        isAuthorized: action.payload
       }
     }
   }
 });
 
-export const { resetToken, setToken } = tokenSlice.actions;
+export const { resetToken, setTokenSlise, setIsAuthorizedState } = tokenSlice.actions;
 
 export default tokenSlice.reducer;

@@ -2,19 +2,25 @@
   position: relative;
   display: flex;
   align-items: center;
+  max-width: 400px;
+  width: 0;
+  cursor: pointer;
+  transition: width .3s ease-in-out;
 }
 
 .input {
-  padding: 12px 37px;
-  width: 400px;
+  padding: 12px 23px;
+  width: 100%;
   border-radius: 25px;
   border: none;
   outline: none;
   background-color: var(--background);
   transition: background-color .15s ease-in-out;
   border: 1px solid var(--darkLine);
-  font-size: 14px;
+  font-size: 18px;
   color: var(--trueLight);
+  transition: border-color .2s ease-in-out;
+  transition: padding .3s ease-in-out;
 }
 
 .input::-webkit-search-cancel-button {
@@ -23,7 +29,7 @@
 
 .input::placeholder {
   color: var(--gray99);
-  font-size: 14px;
+  font-size: 18px;
 }
 
 .input:focus {
@@ -39,8 +45,8 @@
   width: 30px;
   height: 30px;
   position: absolute;
-  top: 7px;
-  left: 7px;
+  top: 9px;
+  left: 9px;
 }
 
 .clearButton {
@@ -54,7 +60,43 @@
   top: 6px;
 }
 
+.search svg path {
+  transition: stroke .2s ease-in-out;
+}
+
 
 .clearButton svg {
   position: static;
+}
+
+.search:hover .input {
+  border-color: var(--commentBorder);
+}
+
+.search:hover svg path {
+  stroke: var(--commentBorder);
+}
+
+.isClosed.search {
+  width: 400px;
+}
+
+.isClosed.search .input {
+  padding: 12px 37px;
+}
+
+@media(max-width: 1024px) {
+  .input {
+    font-size: 14px;
+    padding: 12px 21px;
+  }
+
+  .input::placeholder {
+    font-size: 14px;
+  }
+
+  .search svg {
+    top: 7px;
+    left: 7px;
+  }
 }

@@ -1,5 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { getPaginationMaxPagesValue } from "../../utils/getPaginationMaxPagesValue";
+import { getPaginationListArray, IArrPages } from "../../utils/getPaginationListArray";
 
 interface IPages {
   [key: number]: string
@@ -24,6 +25,7 @@ export interface IPagesState {
   onStartCursor: string;
   onEndCursor: string;
   pages: IPages;
+  paginationList: IArrPages[];
 }
 
 interface ICurrentQueryAction {
@@ -52,7 +54,8 @@ const initialState: IPagesState = {
   onForward: true,
   onStartCursor: '',
   onEndCursor: '',
-  pages: {}
+  pages: {},
+  paginationList: []
 }
 
 const pagesSlice = createSlice({
@@ -94,24 +97,21 @@ const pagesSlice = createSlice({
       const { currentPage, maxPagesPagination } = state;
       const { pagesCountPagination, pagesCount } = state.currentQuery;
       const onForward = payload.payload > currentPage ? true : false;
-
       const paginationCenterOffset = (Math.floor(maxPagesPagination / 2))
-
       const firstNumber = payload.payload - paginationCenterOffset;
-
       const lastNumber = payload.payload + 1 + paginationCenterOffset;
-
       const maxFirstNumber = pagesCount + 1 - maxPagesPagination;
-
       const currentFirstNumber = (firstNumber <= 0 || pagesCountPagination < maxPagesPagination)
         ? 1
         : lastNumber >= pagesCount ? maxFirstNumber : firstNumber;
+      const paginationList = getPaginationListArray(currentFirstNumber, pagesCountPagination);
 
       return {
         ...state,
         targetPage: payload.payload,
         onForward,
-        firstNumberVisible: currentFirstNumber
+        firstNumberVisible: currentFirstNumber,
+        paginationList
       }
     },
 
@@ -126,12 +126,10 @@ const pagesSlice = createSlice({
         startCursor,
         endCursor
       } = action.payload;
-
-      const { itemsPerPage, maxPagesPagination } = state;
-
+      const { itemsPerPage, maxPagesPagination, firstNumberVisible } = state;
       const pagesCount = Math.ceil(repositoryCount / itemsPerPage);
-
       const pagesCountPagination = getPaginationMaxPagesValue(pagesCount, maxPagesPagination);
+      const paginationList = getPaginationListArray(firstNumberVisible, pagesCountPagination);
 
       return {
         ...state,
@@ -144,13 +142,34 @@ const pagesSlice = createSlice({
           endCursor,
           pagesCount,
           pagesCountPagination
-        }
+        },
+        paginationList
+      }
+    },
+
+    setMaxPagesPagination(state, action: PayloadAction<boolean>) {
+      const { firstNumberVisible } = state;
+      const { pagesCount } = state.currentQuery;
+      const maxPagesPagination = action.payload ? 6 : 9
+      const pagesCountPagination = getPaginationMaxPagesValue(pagesCount, maxPagesPagination);
+      const paginationList = getPaginationListArray(firstNumberVisible, pagesCountPagination);
+
+      return {
+        ...state,
+        maxPagesPagination,
+        paginationList
       }
     }
   }
 })
 
-export const { setCurrentQuery, setTargetPage, setCursorNextPage, setCursorPrevPage, resetPagesData } = pagesSlice.actions;
+export const {
+  setCurrentQuery,
+  setTargetPage,
+  setCursorNextPage,
+  setCursorPrevPage,
+  resetPagesData,
+  setMaxPagesPagination } = pagesSlice.actions;
 
 export default pagesSlice.reducer;
 

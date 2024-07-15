@@ -1,31 +1,36 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { ReactNode, useEffect } from "react";
-import { setClient } from "./client";
-import { selectAppoloData, useAppSelector } from "../../../store/storeSelectors";
+import { useClient } from "./client";
 import { useDispatch } from "react-redux";
-// import { saveTokenAsyncThunk } from "../../../store/thunks/token/saveTokenAsyncThunk";
 import { resetToken } from "../../../store/slices/tokenSlice";
 import { ApolloProvider } from "@apollo/client/index.js";
+import { useToken } from "../../../hooks/useToken";
+import { selectAppoloData, useAppSelector } from "../../../store/storeSelectors";
+import { changeLocationAuth } from "../../../utils/changeLocationAuth";
+import { changeLocationIsAuthorized } from "../../../utils/changeLocationIsAuthorized";
+import { useIsAuthorized } from "../../../hooks/useIsAuthorized";
 
 interface IProviderApollo {
   children: ReactNode;
 }
 
 export function ProviderApollo({ children }: IProviderApollo) {
-  const client = setClient();
+  const { isToken, liveTimeMinutes } = useAppSelector(selectAppoloData);
+  const token = useToken();
+  const client = useClient(token);
   const dispatch = useDispatch();
-  const { token, CreatedAt, liveTimeMinutes } = useAppSelector(selectAppoloData);
-  const timeNow = new Date().getTime();
+  const authorized = useIsAuthorized();
 
   useEffect(() => {
-    // dispatch(saveTokenAsyncThunk());
+    !token && authorized && changeLocationIsAuthorized();
 
-    if (token) {
+    if (isToken) {
       setTimeout(() => {
         dispatch(resetToken());
-      }, liveTimeMinutes * 60 * 1000 - (timeNow - CreatedAt));
+        changeLocationAuth();
+      }, 1000 * 60 * liveTimeMinutes);
     }
-  }, [token]);
+  }, [isToken, token, authorized]);
 
   return (
     <ApolloProvider client={client}>

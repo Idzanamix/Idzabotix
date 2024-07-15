@@ -1,4 +1,4 @@
-interface IArrPages {
+export interface IArrPages {
   pageNumber: number
 }
 

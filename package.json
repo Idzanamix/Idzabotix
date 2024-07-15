@@ -8,7 +8,7 @@
     "build": "npm run build:client && npm run build:server",
     "build:client": "vite build --ssrManifest --outDir dist/client",
     "build:server": "vite build --ssr src/entry-server.jsx --outDir dist/server",
-    "preview": "cross-env NODE_ENV=production SITE_URL=http://localhost:5173/oauth CLIENT_SECRET=0ee3f8f7f536db2419b5f0a429b0b87541f8e213 CLIENT_ID=Ov23liAiSj0OEr2TM7yd node server",
+    "preview": "cross-env NODE_ENV=production DOMAIN=https://toolkinamix.ru/ SITE_URL=https://toolkinamix.ru/oauth CLIENT_SECRET=c22c0ac78c72c89d71587a90b57181d47e5122e2 CLIENT_ID=Ov23liAiSj0OEr2TM7yd node server",
     "comp": "generate-react component",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "generate": "graphql-codegen --config codegen.yml"
@@ -18,7 +18,9 @@
     "@reduxjs/toolkit": "^2.2.6",
     "@types/express": "^4.17.21",
     "axios": "^1.7.2",
+    "body-parser": "^1.20.2",
     "compression": "^1.7.4",
+    "cookie-parser": "^1.4.6",
     "cors": "^2.8.5",
     "cross-env": "^7.0.3",
     "express": "^4.19.2",
@@ -33,7 +35,8 @@
     "react-router-dom": "^6.24.1",
     "redux": "^5.0.1",
     "redux-persist": "^6.0.0",
-    "sirv": "^2.0.4"
+    "sirv": "^2.0.4",
+    "use-match-media-hook": "^1.0.1"
   },
   "devDependencies": {
     "@graphql-codegen/cli": "^5.0.2",

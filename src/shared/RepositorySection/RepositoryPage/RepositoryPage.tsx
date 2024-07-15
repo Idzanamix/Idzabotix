@@ -3,11 +3,11 @@
 import { useParams } from 'react-router-dom';
 import { useRepositoryDataByIdQuery } from './repositoryPage.generated';
 import styles from './RepositoryPage.module.css'
-import { getTokenCookie } from '../../../store/cookie/token/getTokenCookie';
 import { Error } from '../../errorBanners/Error';
 import { getRelativeTimeString } from '../../../utils/getRelativeTimeString';
 import { StargazerCount } from '../StargazerCount';
 import { LanguagesList } from './LanguagesList';
+import { selectIsToken, useAppSelector } from '../../../store/storeSelectors';
 
 interface IRepositoryPage {
   owner: {
@@ -42,7 +42,7 @@ interface IRepositoryPage {
 }
 
 export function RepositoryPage() {
-  const token = getTokenCookie();
+  const IsToken = useAppSelector(selectIsToken);
   const { id } = useParams();
 
   const { data, loading, error } = useRepositoryDataByIdQuery({
@@ -52,7 +52,7 @@ export function RepositoryPage() {
   });
 
   if (loading) return <div>Loading...</div>
-  if (!token) return <Error massage='Log in to get started' />;
+  if (!IsToken) return <Error massage='Log in to get started' />;
   if (!data || error) return <Error massage='ERROR 404: page not found' />;
 
   const {
@@ -71,8 +71,6 @@ export function RepositoryPage() {
     description,
     stargazerCount,
     languages } = data.node as IRepositoryPage;
-
-  console.log('edges[0]', data.node);
 
   return (
     <div className={styles.repository}>

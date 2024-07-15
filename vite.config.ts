@@ -9,6 +9,7 @@ export default defineConfig({
       '/oauth': {
         target: 'http://localhost:5173',
         changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/oauth/, "/oauth")
       },
       middlewareMode: 'ssr',
     },

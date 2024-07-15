@@ -1,11 +1,11 @@
 .link {
-  height: 40px;
+  height: 50px;
   display: flex;
 }
 
 .logo {
-  width: 40px;
-  height: 40px;
+  width: 50px;
+  height: 50px;
   margin-right: 7px;
   transition: scale .7s ease;
 }
@@ -13,7 +13,7 @@
 .nameToolki,
 .nameNamix {
   font-weight: 900;
-  font-size: 24px;
+  font-size: 30px;
   padding-top: 6px;
   color: var(--colorPurple);
   transition: color .2s ease-in-out;
@@ -33,4 +33,22 @@
 
 .link:hover .nameNamix {
   color: var(--colorPurple);
+}
+
+@media(max-width: 1024px) {
+  .link {
+    height: 40px;
+  }
+
+
+  .nameToolki,
+  .nameNamix {
+    font-size: 24px;
+  }
+
+  .logo {
+    margin: 0;
+    width: 40px;
+    height: 40px;
+  }
 }

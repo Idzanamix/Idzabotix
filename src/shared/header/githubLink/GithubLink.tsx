@@ -1,27 +1,28 @@
-import { useDispatch } from "react-redux";
-import { resetToken } from "../../../store/slices/tokenSlice";
-import { selectIsToken, useAppSelector } from "../../../store/storeSelectors";
-import { NavLink } from "react-router-dom";
+import { useCustomMatchMedia } from "../../../hooks/useCustomMatchMedia";
+import { selectAppoloData, useAppSelector } from "../../../store/storeSelectors";
+import { changeLocationAuth } from "../../../utils/changeLocationAuth";
+import { changeLocationLogout } from "../../../utils/changeLocationLogout";
+import styles from './githubLink.module.css'
 
 export function GithubLink() {
-  const IsToken = useAppSelector(selectIsToken);
-  const dispatch = useDispatch();
-
-  function handleClick() {
-    dispatch(resetToken());
-  }
+  const { isAuthorized } = useAppSelector(selectAppoloData);
+  const { mobile } = useCustomMatchMedia();
 
   return (
-    IsToken
-      ? <NavLink to={'/'} onClick={handleClick}>
-        Log out
-      </NavLink>
+    isAuthorized
+      ? <a
+        onClick={changeLocationLogout}
+        className={styles.link}
+      >
+        Log&nbsp;out
+      </a>
 
       : <a
         type="button"
-        onClick={() => window.location.href = '/auth'}
+        onClick={changeLocationAuth}
+        className={styles.link}
       >
-        log in GitHub
+        log&nbsp;in {` ${mobile ? '' : 'GitHub'}`}
       </a>
   )
 }

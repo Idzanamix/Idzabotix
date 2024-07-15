@@ -36,7 +36,6 @@ const persistConfig = {
   key: 'noop',
   storage,
   whitelist: [
-    'githubToken',
     'pagesPagination',
     'search'
   ]
