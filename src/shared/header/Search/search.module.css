@@ -2,10 +2,11 @@
   position: relative;
   display: flex;
   align-items: center;
-  max-width: 400px;
+  max-width: 500px;
   width: 0;
   cursor: pointer;
-  transition: width .3s ease-in-out;
+  transition: width .2s ease-in-out, transform .1s ease-in-out .2s;
+  transform: translateY(0) translateX(-20px);
 }
 
 .input {
@@ -77,15 +78,21 @@
   stroke: var(--commentBorder);
 }
 
-.isClosed.search {
-  width: 400px;
+.isOpen.search {
+  transform: translateY(105%);
+  transition: width .2s ease-in-out .15s, transform .1s ease-in-out;
+  width: calc(100% - 30px);
 }
 
-.isClosed.search .input {
+.isOpen.search .input {
   padding: 12px 37px;
 }
 
 @media(max-width: 1024px) {
+  .isOpen.search {
+    position: absolute;
+  }
+
   .input {
     font-size: 14px;
     padding: 12px 21px;

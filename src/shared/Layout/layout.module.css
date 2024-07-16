@@ -5,6 +5,7 @@
     padding-left: 175px;
     padding-right: 175px;
     height: 100%;
+    background-color: var(--background);
   }
 
   @media(max-width:1024px) {

@@ -1,4 +1,4 @@
-import { ChangeEvent, KeyboardEvent, useRef, useState } from 'react';
+import { ChangeEvent, KeyboardEvent, useEffect, useRef, useState } from 'react';
 import { IconClear, IconSearch } from '../../../icons'
 import { selectSearchValue, useAppSelector } from '../../../store/storeSelectors'
 import styles from './search.module.css'
@@ -15,9 +15,14 @@ export function Search() {
   const navigate = useNavigate();
   const timerDispatchDelay = createTimer();
   const ref = useRef<HTMLDivElement>(null);
+  const inputRef = useRef<HTMLInputElement>(null);
   const search = useAppSelector(selectSearchValue);
   const [isOpen, setIsOpen] = useState(search ? true : false);
   const [searchValue, setSearchValueInput] = useState(search);
+
+  useEffect(() => {
+    setSearchValueInput(search);
+  }, [search])
 
   function handleChange(event: ChangeEvent<HTMLInputElement>) {
     setSearchValueInput(event.target.value);
@@ -45,6 +50,23 @@ export function Search() {
   function handleMouseUp() {
     if (!isOpen) {
       setIsOpen(true);
+      inputRef.current?.focus();
+    }
+
+    if (searchValue && ref.current) {
+      ref.current.style.opacity = '1'
+    }
+  }
+
+  function handleHover() {
+    if (searchValue && ref.current) {
+      ref.current.style.opacity = '1'
+    }
+  }
+
+  function handleMouseLeave() {
+    if (searchValue && ref.current && !inputRef.current?.contains(document.activeElement)) {
+      ref.current.style.opacity = '.7'
     }
   }
 
@@ -52,14 +74,20 @@ export function Search() {
     if (isOpen && !searchValue) {
       setIsOpen(false);
     }
+
+    if (searchValue && ref.current) {
+      ref.current.style.opacity = '.7'
+    }
   }
 
   useModalCloser({ onClose, ref });
 
   return (
     <div
-      className={`${styles.search}${isOpen ? ' ' + styles.isClosed : ''}`}
+      className={`${styles.search}${searchValue || isOpen ? ' ' + styles.isOpen : ''}`}
       onMouseUp={handleMouseUp}
+      onMouseMove={handleHover}
+      onMouseLeave={handleMouseLeave}
       ref={ref}
     >
       <input
@@ -70,6 +98,7 @@ export function Search() {
         onChange={handleChange}
         onKeyUp={handleKeyUp}
         onKeyDown={handleKeyDown}
+        ref={inputRef}
       >
       </input>
       <IconSearch />

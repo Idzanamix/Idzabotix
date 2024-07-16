@@ -1,5 +1,5 @@
 import './index.css'
-import { ProviderApollo } from './app/providers/Apollo/ApolloProvider.tsx'
+import { ProviderApollo } from './app/providers/Apollo/ApolloProvider.js'
 import { RepositorySection } from './shared/RepositorySection/RepositorySection.tsx'
 import { MountedBrowserRouter } from './app/providers/Router/Router.tsx'
 import { ReduxProvider } from './app/providers/Redux/Redux.tsx'

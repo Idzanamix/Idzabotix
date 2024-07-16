@@ -12,6 +12,9 @@ const searchSlice = createSlice({
   name: 'token',
   initialState,
   reducers: {
+    resetSearchValue() {
+      return initialState
+    },
     setSearchValue(state, action: PayloadAction<string>) {
       return {
         ...state,
@@ -21,6 +24,6 @@ const searchSlice = createSlice({
   }
 });
 
-export const { setSearchValue } = searchSlice.actions;
+export const { setSearchValue, resetSearchValue } = searchSlice.actions;
 
 export default searchSlice.reducer;

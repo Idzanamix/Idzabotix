@@ -13,7 +13,7 @@ axios.defaults.withCredentials = true;
 const isProduction = process.env.NODE_ENV === 'production'
 const port = process.env.PORT || 5173
 const base = process.env.BASE || '/'
-const dimain = process.env.DOMAIN || 'http://localhost'
+const dimain = process.env.DOMAIN || 'http://localhost:5173'
 const redirect = `https://github.com/login/oauth/authorize?client_id=${process.env.CLIENT_ID}&response_type=code&redirect_uri=${process.env.SITE_URL}`;
 
 // Cached production assets
@@ -64,6 +64,7 @@ app.get('/auth', (req, res) => {
 });
 
 let access_token;
+let redirectCallback;
 
 app.get('/oauth', async ({ query: { code }, cookies }, res) => {
   const params = `client_id=${process.env.CLIENT_ID}&client_secret=${process.env.CLIENT_SECRET}&code=${code}&redirect_uri=${process.env.SITE_URL}`
@@ -96,11 +97,17 @@ app.get('/oauth', async ({ query: { code }, cookies }, res) => {
       }
     }
 
-    res.redirect('/');
+    console.log('redirectCallback', redirectCallback);
 
+    res.redirect(`${redirectCallback || '/'}`);
+
+    redirectCallback = ''
   } catch (error) {
     console.error("Ошибка при получении токена:", error);
+
+    res.redirect(`${redirectCallback || '/'}`);
     res.status(500).send("Ошибка сервера");
+    redirectCallback = ''
   }
 }
 );
@@ -134,13 +141,17 @@ app.get('/isAuthorized', ({ cookies }, res) => {
   }
 })
 
-app.get('/AuthorizedToggle', ({ cookies }, res) => {
+app.get('/AuthorizedToggle/*', ({ cookies, path }, res) => {
   const isAuthorized = cookies?.isAuthorized;
+  const redirectUrl = path.replace('/AuthorizedToggle/', '');
+
+  console.log('object', path.replace('/AuthorizedToggle/', ''));
 
   if (isAuthorized) {
-    res.redirect('/auth')
+    redirectCallback = redirectUrl;
+    res.redirect(`/auth`);
   } else {
-    res.redirect('/')
+    res.redirect(`/${redirectUrl}`);
   }
 })
 
@@ -178,7 +189,7 @@ app.use('*', async (req, res) => {
 
 // Start http server
 app.listen(port, () => {
-  console.log(`Server started at ${dimain}:${port}`)
+  console.log(`Server started at ${dimain}`)
 });
 
 

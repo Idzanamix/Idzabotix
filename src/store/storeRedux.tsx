@@ -37,7 +37,6 @@ const persistConfig = {
   storage,
   whitelist: [
     'pagesPagination',
-    'search'
   ]
 };
 

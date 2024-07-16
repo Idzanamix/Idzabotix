@@ -20,9 +20,12 @@ export function ProviderApollo({ children }: IProviderApollo) {
   const client = useClient(token);
   const dispatch = useDispatch();
   const authorized = useIsAuthorized();
+  const queryString = window.location.pathname;
 
   useEffect(() => {
-    !token && authorized && changeLocationIsAuthorized();
+    console.log(window.location);
+    console.log(queryString);
+    !token && authorized && changeLocationIsAuthorized(queryString);
 
     if (isToken) {
       setTimeout(() => {

@@ -1,4 +1,4 @@
-export function changeLocationIsAuthorized() {
-  window.location.href = '/AuthorizedToggle'
+export function changeLocationIsAuthorized(path: string | null) {
+  window.location.href = `/AuthorizedToggle/${path || 'repository'}`
 }
 
