@@ -97,8 +97,6 @@ app.get('/oauth', async ({ query: { code }, cookies }, res) => {
       }
     }
 
-    console.log('redirectCallback', redirectCallback);
-
     res.redirect(`${redirectCallback || '/'}`);
 
     redirectCallback = ''
@@ -144,8 +142,6 @@ app.get('/isAuthorized', ({ cookies }, res) => {
 app.get('/AuthorizedToggle/*', ({ cookies, path }, res) => {
   const isAuthorized = cookies?.isAuthorized;
   const redirectUrl = path.replace('/AuthorizedToggle/', '');
-
-  console.log('object', path.replace('/AuthorizedToggle/', ''));
 
   if (isAuthorized) {
     redirectCallback = redirectUrl;

@@ -7,7 +7,7 @@ export default defineConfig({
     cors: false,
     proxy: {
       '/oauth': {
-        target: 'http://localhost:5173',
+        target: 'https://toolkinamix.ru',
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/oauth/, "/oauth")
       },

@@ -1,4 +1,5 @@
-import { ChangeEvent, KeyboardEvent, useEffect, useRef, useState } from 'react';
+/* eslint-disable react-hooks/exhaustive-deps */
+import { ChangeEvent, KeyboardEvent, useRef, useState } from 'react';
 import { IconClear, IconSearch } from '../../../icons'
 import { selectSearchValue, useAppSelector } from '../../../store/storeSelectors'
 import styles from './search.module.css'
@@ -18,11 +19,13 @@ export function Search() {
   const inputRef = useRef<HTMLInputElement>(null);
   const search = useAppSelector(selectSearchValue);
   const [isOpen, setIsOpen] = useState(search ? true : false);
-  const [searchValue, setSearchValueInput] = useState(search);
-
-  useEffect(() => {
-    setSearchValueInput(search);
-  }, [search])
+  const requestSearch = window.location.pathname;
+  const subStr = '/repository/search/';
+  const [searchValue, setSearchValueInput] = useState(
+    requestSearch.includes(subStr)
+      ? requestSearch.replace('/repository/search/', '')
+      : search
+  );
 
   function handleChange(event: ChangeEvent<HTMLInputElement>) {
     setSearchValueInput(event.target.value);

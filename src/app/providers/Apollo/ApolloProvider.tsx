@@ -23,8 +23,6 @@ export function ProviderApollo({ children }: IProviderApollo) {
   const queryString = window.location.pathname;
 
   useEffect(() => {
-    console.log(window.location);
-    console.log(queryString);
     !token && authorized && changeLocationIsAuthorized(queryString);
 
     if (isToken) {

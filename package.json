@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "cross-env SITE_URL=http://localhost:5173/oauth CLIENT_SECRET=0ee3f8f7f536db2419b5f0a429b0b87541f8e213 CLIENT_ID=Ov23liAiSj0OEr2TM7yd node server",
-    "preview:dev": "cross-env NODE_ENV=production SITE_URL=http://localhost:5173/oauth CLIENT_SECRET=c22c0ac78c72c89d71587a90b57181d47e5122e2 CLIENT_ID=Ov23liAiSj0OEr2TM7yd node server",
+    "preview:dev": "cross-env NODE_ENV=production SITE_URL=http://localhost:5173/oauth CLIENT_SECRET=bd83daff5344140d69bc91b3544019ec255c15b2 CLIENT_ID=Ov23liTqTXjAP3Ma1u0u node server",
     "build": "npm run build:client && npm run build:server",
     "build:client": "vite build --ssrManifest --outDir dist/client",
     "build:server": "vite build --ssr src/entry-server.jsx --outDir dist/server",

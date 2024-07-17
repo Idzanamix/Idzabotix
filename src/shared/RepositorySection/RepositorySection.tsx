@@ -9,19 +9,17 @@ import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { IRepositoryItem } from './RepositoryItem';
 import { useParams } from 'react-router-dom';
-import { setSearchValue } from '../../store/slices/searchSlice';
 
 export function RepositorySection() {
   const dispatch = useDispatch();
   const { onForward, targetPage, onEndCursor, onStartCursor } = useAppSelector(selectPagesData);
   const { isToken, isAuthorized } = useAppSelector(selectAppoloData);
   const { request } = useParams();
-  // const navigate = useNavigate();
 
   const { data, loading, error } = useRepositorysDataByStarsQuery({
     skip: !isToken,
     variables: {
-      query: request || "stars:>1",
+      query: (request && (`${request} sort:stars`)) || "stars:>1",
       before: onStartCursor,
       after: onEndCursor
     },
@@ -30,10 +28,6 @@ export function RepositorySection() {
   const repositorysList = data?.search.nodes as IRepositoryItem[];
 
   useEffect(() => {
-    console.log('request', request);
-    request && dispatch(setSearchValue(request));
-    // search && navigate(`/repository/search/${search}`);
-
     if (!data) return;
 
     const { repositoryCount } = data.search;
@@ -53,7 +47,7 @@ export function RepositorySection() {
       dispatch(setCursorPrevPage());
     }
 
-  }, [data, targetPage, request]);
+  }, [data, targetPage]);
 
   return (
     <section className={styles.section}>
