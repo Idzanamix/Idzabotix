@@ -1,14 +1,6 @@
-import { ReactNode } from 'react'
-import styles from './layout.module.css'
+import * as React from 'react';
+import Button from '@mui/material/Button';
 
-interface ILayout {
-  children: ReactNode
-}
-
-export function Layout({ children }: ILayout) {
-  return (
-    <div className={styles.layout}>
-      {children}
-    </div>
-  )
+export default function ButtonUsage() {
+  return <Button variant="contained">Hello world</Button>;
 }

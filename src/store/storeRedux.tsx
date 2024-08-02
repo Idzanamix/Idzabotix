@@ -13,8 +13,6 @@ import {
   REGISTER,
 } from 'redux-persist';
 import tokenSlice from './slices/tokenSlice';
-import pagesSlice from './slices/pagesSlice';
-import searchSlice from './slices/searchSlice';
 
 const createNoopStorage = () => {
   return {
@@ -36,14 +34,11 @@ const persistConfig = {
   key: 'noop',
   storage,
   whitelist: [
-    'pagesPagination',
   ]
 };
 
 const rootReducer = combineReducers({
   githubToken: tokenSlice,
-  pagesPagination: pagesSlice,
-  search: searchSlice
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
