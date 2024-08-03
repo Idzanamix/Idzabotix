@@ -8,10 +8,6 @@ export async function renderMiddleware(req, res) {
       ? await fs.readFile('./dist/client/index.html', 'utf-8')
       : '';
 
-    const ssrManifest = IS_PROD
-      ? await fs.readFile('./dist/client/.vite/ssr-manifest.json', 'utf-8')
-      : undefined;
-
     const url = req.originalUrl.replace(BASE, '');
 
     let template;
@@ -19,18 +15,21 @@ export async function renderMiddleware(req, res) {
 
     if (!IS_PROD) {
       template = await fs.readFile('./index.html', 'utf-8');
+
       template = await vite.transformIndexHtml(url, template);
+
       render = (await vite.ssrLoadModule('/src/entry-server.tsx')).render;
     } else {
       template = templateHtml;
+      
       render = (await import('../dist/server/entry-server.js')).render;
     }
 
-    const rendered = await render(url, ssrManifest);
+    const appHtml = await render({ path: url });
 
     const html = template
-      .replace('<!--app-head-->', rendered.head ?? '')
-      .replace('<!--app-html-->', rendered.html ?? '');
+      .replace('<!--app-head-->', appHtml.emotionCss ?? '')
+      .replace('<!--app-html-->', appHtml.html ?? '');
 
     res.status(200).set({ 'Content-Type': 'text/html' }).send(html);
   } catch (error) {

@@ -18,6 +18,8 @@ export default defineConfig({
     outDir: 'dist',
   },
   ssr: {
-    noExternal: ['@mui/material'],
+    optimizeDeps: {
+      include: ['...'],
+    },
   },
 })
