@@ -1,6 +1,6 @@
 import './index.css'
 import { Main } from './shared/Main';
-
+import { Route, Routes } from 'react-router-dom';
 import { Container, NoSsr } from '@mui/material';
 import LoginForm from './shared/LoginForm/LoginForm';
 
@@ -17,7 +17,9 @@ const App = () => {
     <NoSsr>
       <Container>
         <Main>
-          <LoginForm />
+          <Routes>
+            <Route path='/' element={<LoginForm />} />
+          </Routes>
         </Main>
       </Container>
     </NoSsr>
