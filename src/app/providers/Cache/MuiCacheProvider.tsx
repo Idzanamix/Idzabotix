@@ -1,14 +1,15 @@
 import { CacheProvider } from '@emotion/react';
-import { clientSideEmotionCache } from './createEmotionCache';
+import { createEmotionCache } from './createEmotionCache';
 
 interface ICacheProvider {
   children: React.ReactNode;
 }
 
+const cache = createEmotionCache();
 
 export function MuiCacheProvider({ children }: ICacheProvider) {
   return (
-    <CacheProvider value={clientSideEmotionCache}>
+    <CacheProvider value={cache}>
       {children}
     </CacheProvider>
   )

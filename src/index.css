@@ -1,2 +1,30 @@
+:root {
+  --background:
+}
+
+* {
+  box-sizing: border-box;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+a {
+  font-weight: 500;
+  color: var(--colorPurple);
+  text-decoration: inherit;
+  font-size: 22px;
+  cursor: pointer;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  font-family: 'Roboto', serif;
+  background-color: #424242 !important;
+}
+
+
+
 
 

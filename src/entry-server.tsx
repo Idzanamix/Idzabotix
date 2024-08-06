@@ -5,9 +5,11 @@ import { ReduxProvider } from "./app/providers/Redux/Redux"
 import { StaticRouter } from "react-router-dom/server";
 import { MuiThemeProvider } from "./app/providers/Theme/ThemeProvider";
 import { CssBaseline } from "@mui/material";
-import { clientSideEmotionCache } from "./app/providers/Cache/createEmotionCache";
 import createEmotionServer from '@emotion/server/create-instance';
-import { MuiCacheProvider } from "./app/providers/Cache/MuiCacheProvider";
+import { extractStyleTags } from "./utils/extractStyleTags";
+import { removeStyleTags } from "./utils/removeStyleTags";
+import { createEmotionCache } from "./app/providers/Cache/createEmotionCache";
+import { CacheProvider } from "@emotion/react";
 
 interface IRenderApp {
   path: string;
@@ -15,25 +17,29 @@ interface IRenderApp {
 
 
 export function render({ path }: IRenderApp) {
-  const { extractCriticalToChunks, constructStyleTagsFromChunks } = createEmotionServer(clientSideEmotionCache);
+  const cache = createEmotionCache()
+  const { extractCriticalToChunks, constructStyleTagsFromChunks } = createEmotionServer(cache);
 
-  const html = ReactDOMServer.renderToString(
+  const htmlString = ReactDOMServer.renderToString(
     <React.StrictMode>
       <ReduxProvider>
         <StaticRouter location={path}>
-          <MuiCacheProvider>
+          <CacheProvider value={cache}>
             <MuiThemeProvider>
               <CssBaseline />
               <App />
             </MuiThemeProvider>
-          </MuiCacheProvider>
+          </CacheProvider>
         </StaticRouter>
       </ReduxProvider>
     </React.StrictMode>
   );
 
-  const emotionChunks = extractCriticalToChunks(html);
+  const emotionChunks = extractCriticalToChunks(htmlString);
   const emotionCss = constructStyleTagsFromChunks(emotionChunks);
 
-  return { html, emotionCss }
+  const css = extractStyleTags(htmlString) + emotionCss;
+  const html = removeStyleTags(htmlString);
+
+  return { html, css }
 }

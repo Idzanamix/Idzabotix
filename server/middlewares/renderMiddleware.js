@@ -21,14 +21,14 @@ export async function renderMiddleware(req, res) {
       render = (await vite.ssrLoadModule('/src/entry-server.tsx')).render;
     } else {
       template = templateHtml;
-      
+
       render = (await import('../dist/server/entry-server.js')).render;
     }
 
     const appHtml = await render({ path: url });
 
     const html = template
-      .replace('<!--app-head-->', appHtml.emotionCss ?? '')
+      .replace('<!--app-head-->', appHtml.css ?? '')
       .replace('<!--app-html-->', appHtml.html ?? '');
 
     res.status(200).set({ 'Content-Type': 'text/html' }).send(html);

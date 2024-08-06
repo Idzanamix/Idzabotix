@@ -7,3 +7,4 @@ declare module 'cookie-parser'
 declare module '@mui/material/Typography/Typography' {
   interface TypographyPropsVariantOverrides extends Record<CustomVariants, true> {}
 }
+

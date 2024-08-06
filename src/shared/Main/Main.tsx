@@ -1,5 +1,5 @@
 import { ReactNode } from 'react';
-import styles from './main.module.css';
+import styles from './main.module.css'
 
 interface IMain {
   children: ReactNode;
