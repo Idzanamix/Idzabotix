@@ -13,7 +13,6 @@ export function IconFruit({ x, y }: IIconFruit) {
       alt="Fruit"
       className={styles.fruit}
       width={273}
-      height={375}
       style={{ translate: `${x}% ${y}%` }}
     />
   )

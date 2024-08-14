@@ -1,4 +1,4 @@
-import React, { lazy } from 'react';
+import React, { lazy, Suspense } from 'react';
 import { Button } from '@mui/material';
 import { useDispatch } from 'react-redux';
 import styles from './saveAndExitModal.module.css'
@@ -31,19 +31,19 @@ function SaveAndExitModal() {
         color="primary"
         variant="contained"
         size="small"
-        onMouseUp={handleMouseUp}
-        onTouchEnd={handleMouseUp}
+        onClick={handleMouseUp}
         startIcon={<ExitToAppIcon />}
         className={styles.button}
       >
         Save and exit
       </Button>
-
-      {isOpen &&
-        <ModalSaveLazy
-          isOpen={isOpen}
-          onClose={handleClose}
-          onSave={handleSaveAndExit} />}
+      <Suspense>
+        {isOpen &&
+          <ModalSaveLazy
+            isOpen={isOpen}
+            onClose={handleClose}
+            onSave={handleSaveAndExit} />}
+      </Suspense>
     </React.Fragment>
   );
 }

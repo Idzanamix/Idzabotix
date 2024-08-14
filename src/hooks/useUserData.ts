@@ -26,6 +26,7 @@ export function useUserData(id: string) {
       console.log(error);
       dispatch(setUserData({ coins, energy }));
       setError(error);
+      setIsLoading(false);
     } finally {
       setIsLoading(false);
     }
