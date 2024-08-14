@@ -1,0 +1,46 @@
+.fruit__group {
+  padding-top: 55px;
+  padding-bottom: 42px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+}
+
+.fruit__group svg {
+  position: absolute;
+  z-index: -1;
+  overflow: visible;
+}
+
+.ellipse {
+  top: -100px;
+}
+
+.ellipse g {
+  max-width: 287px;
+}
+
+.ellipse__fruit {
+  top: 0;
+}
+
+.ellipse__fruit g {
+  width: 256px;
+}
+
+.blob {
+  position: absolute;
+  top: 132px;
+  z-index: -2;
+  transition: opacity 5s ease;
+}
+
+.shadow {
+  top: 390px;
+}
+
+.shadow g {
+  width: 249px;
+  z-index: 1;
+}

@@ -1,0 +1,30 @@
+.energy__score {
+  font-family: var(--font-family);
+  font-weight: 500;
+  font-size: 12px;
+  color: var(--main-white);
+  align-self: start;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 50%;
+  gap: 10px;
+  position: relative;
+}
+
+.energy__bar {
+  background-color: var(--background);
+  border-radius: 38px;
+  width: 100%;
+}
+
+.energy {
+  min-width: 25%;
+  padding: 8px;
+  border-radius: 38px;
+  height: 31px;
+  transition: width .15s ease-in-out, opacity .2s ease;
+}
+
+

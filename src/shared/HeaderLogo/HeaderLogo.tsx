@@ -1,17 +1,19 @@
 import { CardContent, Typography } from "@mui/material";
-import { IconLogo } from "../../icons";
+import styles from './header.module.css'
+import { lazy } from "react";
 
-export function HeaderLogo() {
+const IconLogoLazy = lazy(() => import("../../icons/IconLogo"));
+
+interface IHeaderLogo {
+  text?: string
+}
+
+export function HeaderLogo({ text }: IHeaderLogo) {
   return (
-    <CardContent
-      sx={{
-        marginBottom: 2,
-        display: 'flex',
-        alignItems: 'end'
-      }}>
-      <IconLogo />
+    <CardContent className={styles.card}>
+      <IconLogoLazy className={styles.logo} />
       <Typography
-        variant="h3"
+        variant="h4"
         component="div"
         align='center'
         marginLeft={1}
@@ -19,17 +21,18 @@ export function HeaderLogo() {
         Idza
       </Typography>
       <Typography
-        variant="h3"
+        variant="h4"
         component="div"
-        align='center'
         color='primary'
-        sx={{ transform: 'scale(1.1)' }}
+        className={styles.descr}
       >
-        Bot
+        {`${text ? text : 'Bot'} `}
       </Typography>
-      <Typography variant="h3" component="div" align='center'>
+      <Typography variant="h4" component="div" align='center'>
         ix
       </Typography>
     </CardContent>
   )
 }
+
+export default HeaderLogo;

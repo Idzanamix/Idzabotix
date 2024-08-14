@@ -1,0 +1,36 @@
+.score {
+  padding: 19px;
+  border: 1px solid var(--main-gray);
+  border-radius: 20px;
+  width: 100%;
+  max-width: 550px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: var(--background-gray) right / contain no-repeat url("/img/background_score.svg");
+}
+
+.number {
+  transition: transform .5s ease-in-out, opacity .1s ease;
+  animation: swapNumber .5s forwards;
+}
+
+@keyframes swapNumber {
+  0% {
+    scale: 1;
+  }
+
+  50% {
+    scale: 1.05;
+    opacity: .8;
+  }
+
+  100% {
+    scale: 1;
+    opacity: 1;
+  }
+}
+
+.score>:first-child {
+  margin-right: 10px;
+}

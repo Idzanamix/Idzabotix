@@ -22,7 +22,7 @@ export async function renderMiddleware(req, res) {
     } else {
       template = templateHtml;
 
-      render = (await import('../dist/server/entry-server.js')).render;
+      render = (await import('../../dist/server/entry-server.js')).render;
     }
 
     const appHtml = await render({ path: url });

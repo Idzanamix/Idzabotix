@@ -4,7 +4,6 @@ import ReactDOMServer from 'react-dom/server'
 import { ReduxProvider } from "./app/providers/Redux/Redux"
 import { StaticRouter } from "react-router-dom/server";
 import { MuiThemeProvider } from "./app/providers/Theme/ThemeProvider";
-import { CssBaseline } from "@mui/material";
 import createEmotionServer from '@emotion/server/create-instance';
 import { extractStyleTags } from "./utils/extractStyleTags";
 import { removeStyleTags } from "./utils/removeStyleTags";
@@ -26,7 +25,6 @@ export function render({ path }: IRenderApp) {
         <StaticRouter location={path}>
           <CacheProvider value={cache}>
             <MuiThemeProvider>
-              <CssBaseline />
               <App />
             </MuiThemeProvider>
           </CacheProvider>

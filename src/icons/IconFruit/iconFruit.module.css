@@ -1,0 +1,5 @@
+.fruit {
+  pointer-events: none;
+  transition: translate .07s ease-in-out;
+}
+

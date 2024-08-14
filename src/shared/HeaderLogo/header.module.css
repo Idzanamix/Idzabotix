@@ -1,0 +1,15 @@
+.card {
+  margin-bottom: 10px;
+  display: flex;
+  align-items: end;
+  justify-content: center;
+}
+
+.logo {
+  width: 80px;
+}
+
+.descr {
+  scale: 1.1;
+  align-items: center;
+}

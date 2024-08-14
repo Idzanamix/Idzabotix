@@ -1,0 +1,20 @@
+.fruit__box {
+  height: 375px;
+  -moz-user-select: -moz-none;
+  -o-user-select: none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+  user-select: none;
+  position: relative;
+  touch-action: none;
+}
+
+.fruit__target {
+  position: absolute;
+  right: 30px;
+  left: 30px;
+  height: 275px;
+  opacity: .4;
+  bottom: 20px;
+  z-index: 10;
+}

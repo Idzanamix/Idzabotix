@@ -30,5 +30,5 @@
     "src/types/css.d.ts",
     "src/**/*",
     "server.js"
-  ]
+, "server/bot/generateRangomCat.js"  ]
 }

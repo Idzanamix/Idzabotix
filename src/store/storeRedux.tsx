@@ -12,7 +12,8 @@ import {
   PURGE,
   REGISTER,
 } from 'redux-persist';
-import tokenSlice from './slices/tokenSlice';
+import gameSlice from './slices/gameSlice/gameSlice';
+import userSlice from './slices/userSlice/userSlice';
 
 const createNoopStorage = () => {
   return {
@@ -34,11 +35,13 @@ const persistConfig = {
   key: 'noop',
   storage,
   whitelist: [
+    'user'
   ]
 };
 
 const rootReducer = combineReducers({
-  githubToken: tokenSlice,
+  game: gameSlice,
+  user: userSlice
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

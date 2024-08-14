@@ -6,7 +6,6 @@ import App from './main'
 import { BrowserRouter } from 'react-router-dom'
 import { MuiCacheProvider } from './app/providers/Cache/MuiCacheProvider'
 import { MuiThemeProvider } from './app/providers/Theme/ThemeProvider'
-import { CssBaseline } from '@mui/material'
 
 
 ReactDOM.hydrateRoot(
@@ -16,7 +15,6 @@ ReactDOM.hydrateRoot(
       <BrowserRouter>
         <MuiCacheProvider>
           <MuiThemeProvider>
-            <CssBaseline />
             <App />
           </MuiThemeProvider>
         </MuiCacheProvider>

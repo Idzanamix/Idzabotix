@@ -1,0 +1,14 @@
+.error__banner {
+  display: flex;
+  justify-content: center;
+  padding-top: 50px;
+}
+
+.error {
+  max-width: 495px;
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  padding: 15px 25px;
+}

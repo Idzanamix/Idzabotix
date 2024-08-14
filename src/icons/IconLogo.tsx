@@ -1,7 +1,13 @@
-import image from './img/vite.svg'
+import image from '/img/logo.svg'
 
-export function IconLogo() {
+interface IiconLogo {
+  className?: string;
+}
+
+export function IconLogo({ className }: IiconLogo) {
   return (
-    <img src={image} alt="Idzanamix" />
+    <img src={image} className={className ?? ''} alt="Idzanamix" />
   )
 }
+
+export default IconLogo;

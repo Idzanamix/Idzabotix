@@ -1,0 +1,32 @@
+.loader {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.loader__box {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.logo {
+  position: absolute;
+  width: 60px;
+  height: 60px;
+}
+
+.title {
+  margin-top: -10px;
+  display: flex;
+  text-align: center;
+  color: var(--main-white);
+}
+
+.descr {
+  font-size: 11px;
+}
+

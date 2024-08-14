@@ -1,3 +1,7 @@
 export * from './IconSearch'
 export * from './IconClear'
 export * from './IconLogo'
+export * from './IconCoin'
+export * from './IconEllipse'
+export * from './IconTapBlob_1'
+export * from './IconTapBlob_2'
