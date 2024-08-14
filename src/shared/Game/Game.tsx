@@ -15,6 +15,7 @@ import { increaseCoins, increaseEnergy } from '../../store/slices/gameSlice/game
 import { createInterval } from '../../utils/createInterval'
 import { setUserData } from '../../store/slices/userSlice/userSlice'
 import { createTimer } from '../../utils/creareTimer'
+import { stopScroll } from '../../utils/stopScroll'
 
 const CloseAppModalLazy = lazy(() => import('./SaveAndExitModal/CloseAppModal/CloseAppModal'));
 const FruitGroupLazy = lazy(() => import('./FruitGroup/FruitGroup'));
@@ -45,6 +46,7 @@ function Game() {
 
   useEffect(() => {
     telegramSettings();
+    stopScroll();
     intervalFarmCoins.stop();
     intervalFarmCoins.start(() => {
       dispatch(increaseCoins(100));
