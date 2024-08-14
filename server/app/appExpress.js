@@ -30,7 +30,7 @@ if (!IS_PROD) {
   const sirv = (await import('sirv')).default
   app.use(compression());
   app.use(cors({
-    origin: `${DOMAIN}`,
+    origin: `https://${DOMAIN}`,
     credentials: true,
   }));
   app.use(helmet({

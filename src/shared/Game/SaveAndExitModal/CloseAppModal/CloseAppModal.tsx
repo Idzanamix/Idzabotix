@@ -23,7 +23,7 @@ function CloseAppModal() {
   });
 
   useEffect(() => {
-    error && dispatch(setUserData({ coins, energy: currentEnergy }));
+    dispatch(setUserData({ coins, energy: currentEnergy }));
 
     setTimeout(() => {
       dispatch(setIsOpenModal(false));

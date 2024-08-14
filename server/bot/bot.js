@@ -1,10 +1,10 @@
 import TelegramApi from 'node-telegram-bot-api';
 import { generateRandomCat } from './generateRangomCat.js';
-import { DOMAIN } from '../app/env.js';
+import { DOMAIN, TOKEN } from '../app/env.js';
 import { catArr } from './generateRangomCat.js';
 import { sendLinkToPlay } from './sendLinkToPlay.js'
 
-const bot = new TelegramApi('7043939905:AAEfVxsP-aiPu7KKrWNWoEgiZc7jZ7hRVAw', { polling: true });
+const bot = new TelegramApi(`${TOKEN}`, { polling: true });
 const stickerId = 'CAACAgIAAxkBAAEMndVms6oa7hd7QsewWaoSrhvFAAFqq2MAAlIBAAIw1J0REcIGUv8PNaQ1BA';
 const webAppUrl = `https://${DOMAIN}/game`;
 

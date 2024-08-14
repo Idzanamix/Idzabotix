@@ -14,6 +14,7 @@ import { useDispatch } from 'react-redux'
 import { increaseCoins, increaseEnergy } from '../../store/slices/gameSlice/gameSlice'
 import { createInterval } from '../../utils/createInterval'
 import { setUserData } from '../../store/slices/userSlice/userSlice'
+import { createTimer } from '../../utils/creareTimer'
 
 const CloseAppModalLazy = lazy(() => import('./SaveAndExitModal/CloseAppModal/CloseAppModal'));
 const FruitGroupLazy = lazy(() => import('./FruitGroup/FruitGroup'));
@@ -22,7 +23,7 @@ const EnergyScoreLazy = lazy(() => import('./EnergyScore/EnergyScore'));
 const CoinScoreLazy = lazy(() => import('./CoinScore/CoinScore'));
 
 let intervalFarmCoins = createInterval();
-let intervalSaveProgress = createInterval();
+let timerSaveProgress = createTimer();
 
 function Game() {
   const dispatch = useDispatch();
@@ -33,11 +34,14 @@ function Game() {
   const { currentEnergy, coins, isTaping } = userData;
 
   useEffect(() => {
-    intervalSaveProgress.stop();
-    intervalSaveProgress.start(() => {
-      dispatch(setUserData({ energy: currentEnergy, coins }))
-    }, 6000)
-  }, [!isTaping]);
+    if (isTaping) {
+      timerSaveProgress.stop();
+      timerSaveProgress.start(() => {
+        console.log(currentEnergy, coins);
+        dispatch(setUserData({ energy: currentEnergy, coins }))
+      }, 3000)
+    }
+  }, [isTaping]);
 
   useEffect(() => {
     telegramSettings();
