@@ -4,7 +4,7 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "cross-env TOKEN=7043939905:AAEfVxsP-aiPu7KKrWNWoEgiZc7jZ7hRVAw node ./server/server.js",
+    "dev": "cross-env PORT=443 TOKEN=7043939905:AAEfVxsP-aiPu7KKrWNWoEgiZc7jZ7hRVAw node ./server/server.js",
     "preview:dev": "cross-env NODE_ENV=production TOKEN=7043939905:AAEfVxsP-aiPu7KKrWNWoEgiZc7jZ7hRVAw node ./server/server.js",
     "build": "npm run build:client && npm run build:server",
     "build:client": "vite build --ssrManifest --outDir dist/client",
