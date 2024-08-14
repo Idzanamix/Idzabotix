@@ -12,4 +12,5 @@
   text-align: center;
   overflow: hidden;
   position: relative;
+  touch-action: none;
 }

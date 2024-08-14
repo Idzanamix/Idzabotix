@@ -16,7 +16,7 @@ function CloseAppModal() {
   const { currentEnergy, coins } = useAppSelector(selectUserData);
   const dispatch = useDispatch();
 
-  const { isLoading, isSended, error } = useSendUserData({
+  const { isLoading } = useSendUserData({
     id: userId,
     energy: currentEnergy,
     coins
@@ -46,9 +46,7 @@ function CloseAppModal() {
           component="h2"
           className={styles.descr}
         >
-          {isLoading && 'Saving...'}
-          {isSended && 'Ready!'}
-          {error && 'Error!'}
+          {isLoading ? 'Saving...' : 'Ready!'}
         </Typography>
       </Box>
     </Modal>
