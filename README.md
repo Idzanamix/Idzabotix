@@ -1,16 +1,31 @@
-<img src="https://idzabotix.fun/img/logo.svg" width="60" />Hello everyone! This is my My Telegram Mini game (TS, JS, React + Redux + MUI, VITE + Express) version. 
-I have developed an application to show my skills as a frontend React software engineer.
+<img src="https://idzabotix.fun/img/logo.svg" width="60" />
+
+# Idzanamix
 
 ![Static Badge](https://img.shields.io/badge/Idzanamix-Idzabotix-Idzabotix)
 ![GitHub top language](https://img.shields.io/github/languages/top/Idzanamix/Idzabotix)
 ![GitHub Repo stars](https://img.shields.io/github/stars/Idzanamix/Idzabotix)
 ![GitHub issues](https://img.shields.io/github/issues/Idzanamix/Idzabotix)
 
-## Getting started:
-## My mini game: https://idzabotix.fun
-## Or telegram bot: @IdzanamixBot.
+# Hello everyone! This is my My Telegram Mini game (TS, JS, React + Redux + MUI, VITE + Express) version. 
 
-## Run some command from list:
+# Getting started:
+## 1) Use mini game: https://idzabotix.fun
+### Or telegram bot: @IdzanamixBot
+
+## 2) Use docker server from HTTPS clone URL: https://gitlab.itworkin.com/itworkin_public/test_frontend.git
+
+### The command to start the local server is:
+
+```bash
+docker-compose up -d
+```
+
+### If the server is not started locally, the application will save data to the local storage.
+
+## 3) Engoy game!
+
+## Run some command from list if you want to use app local:
 
 ### Bundling in DEV environment 
 
