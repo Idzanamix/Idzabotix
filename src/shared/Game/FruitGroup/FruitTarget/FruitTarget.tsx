@@ -19,12 +19,16 @@ function FruitTarget() {
   const [position, setPosition] = useState({ x: 0, y: 0 });
   const [isMoving, setIsMoving] = useState(false);
 
-  function handleTouchStart(event: React.TouchEvent) {
-    dispatch(setIsTaping(true))
+  function moveSettings() {
+    dispatch(setIsTaping(true));
     timerTaping.stop();
     timerTaping.start(() => dispatch(setIsTaping(false)));
-
     setIsMoving(true);
+  }
+
+
+  function handleTouchStart(event: React.TouchEvent) {
+    moveSettings();
 
     const touches = Array
       .from(event.touches)
@@ -42,9 +46,21 @@ function FruitTarget() {
     dispatch(setTaps(touches));
   };
 
+
   function handleTouchEnd() {
     setIsMoving(false);
   };
+
+
+  function handleMouseDown(event: React.MouseEvent<HTMLDivElement>) {
+    moveSettings();
+
+    const x = event.pageX;
+    const y = event.pageY;
+    const id = generateRandomString();
+
+    dispatch(setTaps([{ x, y, id }]));
+  }
 
 
   useEffect(() => {
@@ -64,7 +80,6 @@ function FruitTarget() {
     }
   }, [isMoving]);
 
-
   return (
     <Box
       component='div'
@@ -81,6 +96,9 @@ function FruitTarget() {
       <Box
         component='div'
         className={styles.fruit__target}
+        onMouseDown={handleMouseDown}
+        onMouseUp={handleTouchEnd}
+        
         onTouchStart={handleTouchStart}
         onTouchEnd={handleTouchEnd}
         sx={{ pointerEvents: currentEnergy < 26 ? 'none' : 'inherit' }}

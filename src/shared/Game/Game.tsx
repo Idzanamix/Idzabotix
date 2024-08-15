@@ -38,7 +38,6 @@ function Game() {
     if (isTaping) {
       timerSaveProgress.stop();
       timerSaveProgress.start(() => {
-        console.log(currentEnergy, coins);
         dispatch(setUserData({ energy: currentEnergy, coins }))
       }, 3000)
     }
