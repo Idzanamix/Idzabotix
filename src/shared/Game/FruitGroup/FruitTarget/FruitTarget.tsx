@@ -7,6 +7,7 @@ import { setIsTaping, setTaps } from '../../../../store/slices/gameSlice/gameSli
 import { selectFruitTargetData, useAppSelector } from '../../../../store/slices/gameSlice/gameSelectors';
 import { getRandomNumber } from '../../../../utils/getRandomNumber';
 import { createTimer } from '../../../../utils/creareTimer';
+import useMediaQuery from '../../../../hooks/useMediaQuery';
 
 const IconFruitLazy = lazy(() => import('../../../../icons/IconFruit/IconFruit'));
 const TapListLazy = lazy(() => import('./TapList/TapList'));
@@ -14,6 +15,8 @@ const TapListLazy = lazy(() => import('./TapList/TapList'));
 let timerTaping = createTimer();
 
 function FruitTarget() {
+  const noop = () => { };
+  const isMobile = useMediaQuery("(max-width: 540px)");
   const dispatch = useDispatch();
   const { taps, currentEnergy } = useAppSelector(selectFruitTargetData);
   const [position, setPosition] = useState({ x: 0, y: 0 });
@@ -96,9 +99,8 @@ function FruitTarget() {
       <Box
         component='div'
         className={styles.fruit__target}
-        onMouseDown={handleMouseDown}
-        onMouseUp={handleTouchEnd}
-        
+        onMouseDown={isMobile ? noop : handleMouseDown}
+        onMouseUp={isMobile ? noop : handleTouchEnd}
         onTouchStart={handleTouchStart}
         onTouchEnd={handleTouchEnd}
         sx={{ pointerEvents: currentEnergy < 26 ? 'none' : 'inherit' }}
