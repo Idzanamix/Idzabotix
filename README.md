@@ -7,7 +7,7 @@
 ![GitHub Repo stars](https://img.shields.io/github/stars/Idzanamix/Idzabotix)
 ![GitHub issues](https://img.shields.io/github/issues/Idzanamix/Idzabotix)
 
-# Hello everyone! This is my My Telegram Mini game (TS, JS, React + Redux + MUI, VITE + Express) version. 
+# Hello everyone! This is my my telegram mini game (TS, JS, React + Redux + MUI, VITE + Express) version. 
 
 # Getting started:
 ## 1) Use mini game: https://idzabotix.fun
